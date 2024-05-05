@@ -8,6 +8,7 @@ export const fields = [];
 
 function App() {
   const [projectState, setProjectState] = useState(0);
+  const [data, setData] = useState("");
   const titleRef = useRef();
   const descRef = useRef();
   const dateRef = useRef();
@@ -27,6 +28,7 @@ function App() {
       dialog.current.showModal();
     } else {
       fields.push({
+        id: Math.random(),
         title: titleRef.current.value,
         desc: descRef.current.value,
         duedate: dateRef.current.value,
@@ -39,15 +41,16 @@ function App() {
   function handleState(toggle) {
     setProjectState(toggle);
   }
-
+  function handleResult(data1) {
+    setProjectState(2);
+    setData(data1);
+    console.log(data1);
+  }
   return (
     <>
       <Warning refd={dialog} />
       <main className="h-screen my-8 flex gap-8">
-        <ProjectSideBar
-          onProj={() => handleState(2)}
-          onPress={() => handleState(1)}
-        />
+        <ProjectSideBar onProj={handleResult} onPress={() => handleState(1)} />
         {projectState === 0 && (
           <NoProjectSelected onPress={() => handleState(1)} />
         )}
@@ -60,7 +63,7 @@ function App() {
             onPress={() => handleState(0)}
           />
         )}
-        {projectState === 2 && <ProjectDetail />}
+        {projectState === 2 && <ProjectDetail data={data} />}
       </main>
     </>
   );

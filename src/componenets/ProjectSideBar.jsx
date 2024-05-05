@@ -1,6 +1,16 @@
 import Button from "./Buttons";
 import { fields } from "../App";
-export default function ProjectSideBar({ onPress, onProj }) {
+import { forwardRef } from "react";
+const ProjectSideBar = forwardRef(function ProjectSideBar(
+  { onPress, onProj },
+  refRes,
+) {
+  // const refRes = useRef();
+  function handle(value) {
+    console.log(value.title);
+    onProj(value);
+  }
+
   return (
     <aside className="w-1/3 px-8 py-16 bg-stone-900 text-stone-50 md:w-72 rounded-r-xl">
       <h2 className="mb-8 font-bold uppercase md:text-xl text-stone-200">
@@ -13,7 +23,10 @@ export default function ProjectSideBar({ onPress, onProj }) {
         {fields.map((value) => {
           return (
             <button
-              onClick={onProj}
+              ref={refRes}
+              onClick={() => {
+                handle(value);
+              }}
               className="w-full text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800"
               key={value.title}
             >
@@ -24,4 +37,5 @@ export default function ProjectSideBar({ onPress, onProj }) {
       </ul>
     </aside>
   );
-}
+});
+export default ProjectSideBar;

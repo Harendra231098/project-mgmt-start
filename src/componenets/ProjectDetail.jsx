@@ -1,21 +1,18 @@
-export default function ProjectDetail() {
+export default function ProjectDetail({ data }) {
   return (
     <div className="w-[35rem] mt-16">
       <div className="w-[35rem] mt-16">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-stone-600 mb-2">
-            Learn React
+            {data.title}
           </h1>
           <button className="text-stone-600 hover:text-stone-950">
             Delete
           </button>
         </div>
         <header className="pb-4 mb-4 border-b-2 border-stone-300">
-          <p className="mb-4 text-stone-400">23=09-1197</p>
-          <p className="text-stone-600 whitespace-pre-wrap">
-            React basics router redex hillmlmc lle ldlm mlefef lmdokpwmd3 dmoe
-            o33dp o
-          </p>
+          <p className="mb-4 text-stone-400">{data.duedate}</p>
+          <p className="text-stone-600 whitespace-pre-wrap">{data.desc}</p>
         </header>
       </div>
       <h2 className="text-2xl font-bold text-stone-700 mb-4">Tasks</h2>
