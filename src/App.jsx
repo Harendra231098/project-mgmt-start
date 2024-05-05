@@ -17,11 +17,7 @@ function App() {
   const task = useRef();
 
   function handledata() {
-    /*  fields.title = titleRef.current.value;
-    fields.desc = descRef.current.value;
-    fields.duedate = dateRef.current.value;
-    console.log(fields);
-    setProjectState(false);*/
+
     if (
       titleRef.current.value === "" ||
       descRef.current.value === "" ||
@@ -48,21 +44,46 @@ function App() {
   function handleResult(data1) {
     setProjectState(2);
     setData(data1);
-    //console.log(data1);
   }
   function handleDelete(data2) {
+  
     setProjectState(0);
-    fields.splice(data2.id-1,1);
-    //console.log(data2)
-    //console.log(fields);
+    for (let i = 0; i < fields.length; i++) {
+      if (data2.id === fields[i].id) 
+      fields.splice(i, 1);
+        }
+        console.log(fields);
   }
 
   function handleTask(data3)
   {
       //console.log(task.current.value);
+      setProjectState(2);
       data3.tasks.push(task.current.value);
-      handleResult(data3);
+      setData(data3);
+      setProjectState(2);
       console.log(fields);
+      
+  }
+
+  function delHandle(value1,id1)
+  {
+    setProjectState(2);
+    for (let i = 0; i < fields.length; i++) {
+      if (id1 === fields[i].id) {
+        
+         for(let j = 0; j < fields[i].tasks.length; j++){
+          if(fields[i].tasks[j]==value1)
+          fields[i].tasks.splice(j, 1);
+         }
+
+         
+      }
+        }
+        setProjectState(2);
+        console.log(value1);
+        console.log(id1);
+        console.log(fields);
   }
   return (
     <>
@@ -81,7 +102,7 @@ function App() {
             onPress={() => handleState(0)}
           />
         )}
-        {projectState === 2 && <ProjectDetail addTask={handleTask} ref={task} onDelete={handleDelete} data={data} />}
+        {projectState === 2 && <ProjectDetail deleteTask={delHandle} addTask={handleTask} ref={task} onDelete={handleDelete} data={data} />}
       </main>
     </>
   );

@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
- const ProjectDetail=forwardRef(function ProjectDetail({ data ,onDelete,addTask},ref) {
+ const ProjectDetail=forwardRef(function ProjectDetail({ data ,onDelete,addTask,deleteTask},ref) {
   return (
     <div className="w-[35rem] mt-16">
       <div className="w-[35rem] mt-16">
@@ -24,9 +24,9 @@ import { forwardRef } from "react";
       <ul className="p-4 mt-8 rounded-md bg-stone-100">
         {data.tasks.map((value)=>{
           return(
-            <li className="flex justify-between my-4">
+            <li key={Math.random()} className="flex justify-between my-4">
           <span>{value}</span>
-          <button className="text-stone-700 hover:text-red-500" >Clear</button>
+          <button onClick={()=>{deleteTask(value,data.id)}} className="text-stone-700 hover:text-red-500" >Clear</button>
         </li>
           );
         })}
