@@ -1,23 +1,30 @@
 import Input from "./Input";
-export default function NewProject() {
+
+export default function NewProject({ onPress, onHandle, ...props }) {
   return (
     <div className="w-[35rem] mt-16">
       <menu className="flex items-center justify-end gap-4 my-4">
         <li>
-          <button className="text-stone-800 hover:text-stone-950">
+          <button
+            onClick={onPress}
+            className="text-stone-800 hover:text-stone-950"
+          >
             Cancel
           </button>
         </li>
         <li>
-          <button className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950">
+          <button
+            onClick={onHandle}
+            className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950"
+          >
             Save
           </button>
         </li>
       </menu>
       <div>
-        <Input label="Title" />
-        <Input label="Description" isTextArea />
-        <Input label="Due Date" />
+        <Input ref={props.ref1} type="text" label="Title" />
+        <Input ref={props.ref2} type="text" label="Description" isTextArea />
+        <Input ref={props.ref3} type="date" label="Due Date" />
       </div>
     </div>
   );
