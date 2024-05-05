@@ -9,10 +9,12 @@ export const fields = [];
 function App() {
   const [projectState, setProjectState] = useState(0);
   const [data, setData] = useState("");
+  const [count, setCount] = useState(1);
   const titleRef = useRef();
   const descRef = useRef();
   const dateRef = useRef();
   const dialog = useRef();
+  const task = useRef();
 
   function handledata() {
     /*  fields.title = titleRef.current.value;
@@ -28,13 +30,15 @@ function App() {
       dialog.current.showModal();
     } else {
       fields.push({
-        id: Math.random(),
+        id: count,
         title: titleRef.current.value,
         desc: descRef.current.value,
         duedate: dateRef.current.value,
+        tasks:[],
       });
       console.log(fields);
       setProjectState(0);
+      setCount((count)=>count+1);
     }
   }
 
@@ -44,7 +48,21 @@ function App() {
   function handleResult(data1) {
     setProjectState(2);
     setData(data1);
-    console.log(data1);
+    //console.log(data1);
+  }
+  function handleDelete(data2) {
+    setProjectState(0);
+    fields.splice(data2.id-1,1);
+    //console.log(data2)
+    //console.log(fields);
+  }
+
+  function handleTask(data3)
+  {
+      //console.log(task.current.value);
+      data3.tasks.push(task.current.value);
+      handleResult(data3);
+      console.log(fields);
   }
   return (
     <>
@@ -63,7 +81,7 @@ function App() {
             onPress={() => handleState(0)}
           />
         )}
-        {projectState === 2 && <ProjectDetail data={data} />}
+        {projectState === 2 && <ProjectDetail addTask={handleTask} ref={task} onDelete={handleDelete} data={data} />}
       </main>
     </>
   );

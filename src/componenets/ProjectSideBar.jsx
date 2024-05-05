@@ -7,7 +7,7 @@ const ProjectSideBar = forwardRef(function ProjectSideBar(
 ) {
   // const refRes = useRef();
   function handle(value) {
-    console.log(value.title);
+    //console.log(value.title);
     onProj(value);
   }
 
@@ -28,7 +28,7 @@ const ProjectSideBar = forwardRef(function ProjectSideBar(
                 handle(value);
               }}
               className="w-full text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800"
-              key={value.title}
+              key={value.id}
             >
               {value.title}
             </button>
