@@ -52,7 +52,7 @@ function App() {
       if (data2.id === fields[i].id) 
       fields.splice(i, 1);
         }
-        console.log(fields);
+       // console.log(fields);
   }
 
   function handleTask(data3)
